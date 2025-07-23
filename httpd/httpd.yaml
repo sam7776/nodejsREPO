@@ -1,0 +1,8 @@
+apiVersion: v1                # Specifies the API version for Kubernetes objects
+kind: Pod                     # Declares the type of object (Pod)
+metadata:
+  name: guddyachapod               # Sets the name of the Pod
+spec:
+  containers:
+  - name: my-naag             # Name of the container inside the Pod
+    image: nginx              # Docker image to use for this container
