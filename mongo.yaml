@@ -32,4 +32,4 @@ spec:
     - protocol: TCP
       port: 80 # The port the service will listen on
       targetPort: 80 # The port Nginx is listening on inside the container
-  type: LoadBalancer # Use NodePort for local development/on-prem, ClusterIP for internal, LoadBalancer for cloud exposure
+  type: NodePort # Use NodePort for local development/on-prem, ClusterIP for internal, LoadBalancer for cloud exposure
