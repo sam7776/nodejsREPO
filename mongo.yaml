@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 5 # Typically you'd have more for a replica set in production
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest # Use a specific version in production, e.g., mongo:5.0
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: admin # Change this to a strong username in production
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: password # Change this to a strong password in production
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017 # The port the service will listen on
+      targetPort: 27017 # The port MongoDB is listening on inside the container
+  type: ClusterIP # MongoDB is typically an internal service, accessed by other services in the cluster
